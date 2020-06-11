@@ -45,8 +45,7 @@ void setup(){
   GPSSerial.begin(9600);
   pinMode(10, OUTPUT);
   SD.begin(10);
-  root = SD.open("/");
-  
+  root = SD.open("/");  
   gpsPort.begin(9600);
 
   pinMode(17, INPUT_PULLUP);
@@ -61,6 +60,7 @@ void setup(){
 }
 
 void loop(){
+
   lcdMenuInterface();
 }
 
@@ -143,9 +143,9 @@ String DataToString(){
   DataString += localTime.seconds;
   DataString += ", ";
 
-  DataString += fix.latitudeL();
+  DataString += fix.latitude();
   DataString += ", ";
-  DataString += fix.longitudeL();
+  DataString += fix.longitude();
   DataString += ", ";
 
   DataString += fix.satellites;
@@ -305,7 +305,7 @@ void lcdMenuInterface(){
 
   if (flag == 4){
     char filename[8];
-    int n = 0;
+    int n = 1;
     printf(filename, "REC%d.csv", n);
     while (SD.exists(filename)){
       n++;
@@ -313,8 +313,9 @@ void lcdMenuInterface(){
      
     }
     Serial.println(filename);
-    File data = SD.open(filename, FILE_READ);
+    File data = SD.open(filename, FILE_WRITE);
     CurrentFile = filename;
+    data.println("DATE, TIME, LAT, LON, NBSAT, [ID ELEV/AZ]");
     data.close();
     lcd.clear();
     lcd.setCursor(0,0);
