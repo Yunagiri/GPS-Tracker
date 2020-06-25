@@ -8,3 +8,5 @@ The data logged is saved on a SD card, with an interactive GUI comprised of 1 LC
 The format is as follow: DATE, TIME, LATITUDE, LONGTITUDE, NB OF SATELLITES, [ID ELEVATION/AZIMUTH].
 
 Serial Baud: 4800, GPS Baud: 9600, Frames Received: .RMC .GGA .GSV , Last sentence received is .RMC, RX_PIN is 3 and TX_PIN is 2. The serial monitor used is the default SoftwareSerial on the Arduino IDE for ease of use and to reduce dependency.
+
+Possible additionnal functionality: Write a python script to send data straight over to the PC, into a .csv file without the ugly c/c data from the Serial Monitor screen.
